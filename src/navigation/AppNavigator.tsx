@@ -4,23 +4,40 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TokenInputScreen } from '../components/Auth';
 import { PostListScreen } from '../components/Posts';
 import { RootStackParamList } from '../types';
+import { StatusBar } from 'react-native';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const COLORS = {
+  primary: '#9c27b0',
+  primaryDark: '#7b1fa2',
+  background: '#f6f6f6',
+  white: '#ffffff',
+  text: '#212121',
+  textSecondary: '#757575',
+};
 
 const AppNavigator: React.FC = () => {
   return (
     <NavigationContainer>
+      <StatusBar 
+        backgroundColor={COLORS.primaryDark} 
+        barStyle="light-content" 
+      />
       <Stack.Navigator
         initialRouteName="TokenInput"
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#0077cc',
+            backgroundColor: COLORS.primary,
           },
-          headerTintColor: '#fff',
+          headerTintColor: COLORS.white,
           headerTitleStyle: {
             fontWeight: 'bold',
           },
           animation: 'slide_from_right',
+          contentStyle: {
+            backgroundColor: COLORS.background,
+          }
         }}
       >
         <Stack.Screen 
@@ -36,7 +53,7 @@ const AppNavigator: React.FC = () => {
           component={PostListScreen} 
           options={{ 
             title: 'Лента постов',
-            headerLeft: () => null, // Отключаем кнопку назад
+            headerLeft: () => null,
           }}
         />
       </Stack.Navigator>
@@ -44,4 +61,4 @@ const AppNavigator: React.FC = () => {
   );
 };
 
-export default AppNavigator; 
+export default AppNavigator;
